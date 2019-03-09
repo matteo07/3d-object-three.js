@@ -1,39 +1,18 @@
 <html>
 
 <head>
-	<style>
-		body {
-			margin: 0;
-			font-family: sans-serif;
-		}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Matteo Dema</title>
 
-		canvas {
-			width: 100%;
-			height: 100%
-		}
+	<link rel="stylesheet" href="style.css">
 
-		div {
-			text-align: center;
-		}
-
-		p {
-			max-width: 600px;
-			margin-left: auto;
-			margin-right: auto;
-			margin-bottom: 120px;
-		}
-
-		#logo {
-			position: absolute;
-			left: 32px;
-			top: 16px;
-			z-index: 50;
-			color: white;
-		}
-	</style>
+	<script src="js/three.min.js"></script>
+	<script src="js/GLTFLoader.js"></script>
 </head>
 
-<body onmousemove="mouseMove(event)" onload="start()" onresize="start()">
+<body onmousemove="mouseMove(event)" onload="start()">
 	<h1 id="logo">DAEMON</h1>
 	<title>Matteo FRANCESCHI DE MARCHI</title>
 	<div>
@@ -49,94 +28,9 @@
 			facere non dolorum voluptates, dicta voluptatibus suscipit eos? Porro rerum illum velit itaque est in dolorem
 			nihil vitae harum expedita vel qui, iusto beatae, amet nam commodi sed aperiam eos quos sit quis similique totam
 			sint. Pariatur dolorum, esse a. Odit asperiores ad quod, blanditiis adipisci quas suscipit, dignissimos numquam
-			minus inventore, alias repellendus. Quaerat officia, quae explicabo quod exercitationem assumenda ipsa debitis
-			repellendus! Reprehenderit, commodi. Magni ea ipsam consectetur explicabo autem, quisquam sed, quam totam pariatur
-			natus, accusantium alias eos earum! Laborum magni porro, ea hic eius dolore quam rem dolorem cupiditate ratione
-			corrupti, odit dolores iure atque sequi deleniti. Pariatur sit ea fuga deserunt vel dolorum molestias at obcaecati
-			dolores nam ipsam, rem similique molestiae nostrum facilis ducimus, cumque, odio sunt cum placeat magni amet
-			beatae quam. Repellendus veritatis minus harum maxime voluptas impedit libero minima vel quis itaque dolore porro
-			omnis rerum culpa, in similique suscipit fugiat, eum, aspernatur illo sint excepturi, ab. Laudantium beatae sunt
-			dolore at, nam voluptatem necessitatibus est assumenda laborum optio veritatis nobis ad expedita, corporis nisi
-			saepe voluptatibus sit voluptate inventore ut in! Dicta libero quae quaerat neque saepe maxime ad, modi soluta sit
-			ullam vero facere voluptas esse quod odit. Aliquid sapiente temporibus reprehenderit ullam dolor consequatur fugit
-			eius facilis ea sint, nesciunt sit dolorem enim laboriosam quae illo veritatis et nihil. Placeat eos sit eligendi
-			cumque, deleniti, asperiores, praesentium ea fugiat tempora vitae deserunt consequuntur, est quas impedit magni
-			consectetur nisi aliquid aperiam dolorem animi. Libero quisquam, suscipit pariatur temporibus, nesciunt mollitia
-			delectus accusamus voluptatem!</p>
+			minus inventore, alias repellendus. Quaerat officia, quae explicabo quod exercitationem assumenda ipsa debitis</p>
 	</div>
-	<script src="js/three.min.js"></script>
-	<script src="js/GLTFLoader.js"></script>
-	<script>
-		var scene = new THREE.Scene();
-		var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-		var renderer = new THREE.WebGLRenderer();
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		document.body.prepend(renderer.domElement);
-
-		// ADD LIGHT
-		var light = new THREE.PointLight(0xff0000, 10, 100);
-		light.position.set(50, 50, 50);
-		scene.add(light);
-
-		// ADD OBJECT
-		let loader = new THREE.GLTFLoader();
-		let gscene;
-		loader.load("model.glb", function (gltf) {
-			const scale = 2;
-			gltf.scene.scale.set(scale, scale, scale);
-			scene.add(gltf.scene);
-		},
-		);
-
-		/* // ADD CUBE
-		var geometry = new THREE.BoxGeometry(10000, 10000, 10000);
-		var material = new THREE.MeshBasicMaterial({
-			color: 0x002f44,
-			opacity: 0.7,
-			transparent: true
-		});
-
-		var cube = new THREE.Mesh(geometry, material);
-		scene.add( cube ); */
-
-		camera.position.z = 5;
-
-		var animate = function () {
-			requestAnimationFrame(animate);
-
-			/* 		cube.rotation.x += 0.01;
-						cube.rotation.y += 0.01; */
-
-			renderer.render(scene, camera);
-		};
-
-		let mouseMove = function (e) {
-			let centerX = window.innerWidth / 2;
-			let centerY = window.innerHeight / 2;
-			var x = e.clientX;
-			var y = e.clientY;
-
-			let rotationSpeed = .21;
-			let characther = scene.children[1]
-			characther.rotation.y = toRad((centerX - x) * rotationSpeed);
-
-			let movementXSpeed = -.01;
-			let movementYSpeed = .003;
-			camera.position.x = (centerX - x) * movementXSpeed;
-			camera.position.y = (centerY - y) * movementYSpeed;
-		}
-
-		let start = function () {
-			console.log("start")
-			animate();
-		}
-
-		// UTILS
-		function toRad(deg) {
-			return (deg % 360) / 180 * Math.PI
-		}
-	</script>
+	<script src="app.js"></script>
 </body>
 
 </html>
